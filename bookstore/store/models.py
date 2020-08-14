@@ -5,6 +5,10 @@ class Category(models.Model):
     title = models.CharField(max_length=255)
     slug = models.SlugField(max_length=255, verbose_name='Url', unique=True)
 
+    class Meta:
+        verbose_name = 'Категория'
+        verbose_name_plural = "Категории"
+
     def __str__(self):
         return self.title
 
@@ -12,6 +16,10 @@ class Category(models.Model):
 class Tag(models.Model):
     title = models.CharField(max_length=255)
     slug = models.SlugField(max_length=255, verbose_name='Url', unique=True)
+
+    class Meta:
+        verbose_name = 'Тэг'
+        verbose_name_plural = "Тэги"
 
     def __str__(self):
         return self.title
@@ -26,9 +34,10 @@ class Book(models.Model):
     category = models.ForeignKey(Category, on_delete=models.PROTECT, related_name='books')
     tags = models.ManyToManyField(Tag, related_name='books')
 
-    def __str__(self):
-        return self.title
-
     class Meta:
+        verbose_name = 'Книга'
+        verbose_name_plural = "Книги"
         ordering = ['-created_at']
 
+    def __str__(self):
+        return self.title
